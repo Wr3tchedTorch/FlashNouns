@@ -1,0 +1,28 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "start": "cross-env   NODE_ENV=production   node index.js",
+    "test":  "cross-env   NODE_ENV=testing      node --test",
+    "dev":   "cross-env   NODE_ENV=development  nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "express-async-errors": "^3.1.1",
+    "mongoose": "^8.4.1"
+  },
+  "devDependencies": {
+    "@stylistic/eslint-plugin-js": "^2.1.0",
+    "eslint": "^9.4.0",
+    "globals": "^15.4.0",
+    "nodemon": "^3.1.3",
+    "supertest": "^7.0.0"
+  }
+}
