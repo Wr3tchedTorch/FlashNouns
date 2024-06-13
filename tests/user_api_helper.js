@@ -25,7 +25,12 @@ const initialUsers = [
     username: "Fernando Pessoa",
     password: "fernandoanimal",
     score: 283
-  }
+  },
+  {
+    username: "Andresa Queijos",
+    password: "ilovecheese123",
+    score: 15
+  },
 ];
 
 const usersInDb = async () => {
@@ -33,4 +38,9 @@ const usersInDb = async () => {
   return users.map(u => u.toJSON());
 };
 
-module.exports = {usersInDb, initialUsers};
+const getTopFiveScoreUsers = async () => {
+  const users = await User.find({}).sort("score");
+  return users.map(u => u.toJSON()).slice(Math.max(users.length-5, 0));
+};
+
+module.exports = {usersInDb, initialUsers, getTopFiveScoreUsers};

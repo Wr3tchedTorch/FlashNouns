@@ -13,13 +13,18 @@ beforeEach(async () => {
 });
 
 describe("testing the users api", () => {
-  test("get returns the correct number of users", async () => {
-    const result = await api.get("/api/users").expect(200).expect("Content-Type", /application\/json/);
-    console.log(result.body);
-    assert.strictEqual(result.body.length, helper.initialUsers.length);
-  });
-
-  test("get returns users with highest score", () => {
-
+  describe("geting users", () => {
+    test("get returns the correct number of users", async () => {
+      const result = await api.get("/api/users").expect(200).expect("Content-Type", /application\/json/);
+      console.log(result.body);
+      assert.strictEqual(result.body.length, helper.initialUsers.length);
+    });
+  
+    test("get returns users with highest score", async () => {
+      const result = await api.get("/api/users/topFive").expect(200).expect("Content-Type", /application\/json/);      
+      const helperResult = await helper.getTopFiveScoreUsers();
+      assert.strictEqual(result.body.length, 5);
+      assert.deepStrictEqual(result.body.map(u => delete u.id), helperResult.map(u => delete u.password));
+    });
   });
 });
