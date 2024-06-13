@@ -55,5 +55,32 @@ describe("testing the users api", () => {
       delete newUser.body.id;
       assert.deepStrictEqual(newUser.body, user);
     });
+
+    describe("respond with status code 400 when adding a user with an already existing username", async () => {
+      const user = {
+        username: "pedro1agito",
+        password: "senhadopedrao"
+      };
+      const result = await api.post("/api/users").send(user).expect(400).expect("Content-Type", /application\/json/);
+      assert.strictEqual(result.body.error, "expected `username` to be unique");
+    });
+
+    describe("respond with status code 400 when adding a username with less than 3 chars", async () => {
+      const user = {
+        username: "pe",
+        password: "senhadopedrao"
+      };
+      const result = await api.post("/api/users").send(user).expect(400).expect("Content-Type", /application\/json/);
+      assert.strictEqual(result.body.error, "expected `username` length to be at least 3 chars");
+    });
+
+    describe("respond with status code 400 when adding a username with more than 16 chars", async () => {
+      const user = {
+        username: "Immanuel Baaumann",
+        password: "umasenhamuitolegal"
+      };
+      const result = await api.post("/api/users").send(user).expect(400).expect("Content-Type", /application\/json/);
+      assert.strictEqual(result.body.error, "expected `username` length to be lower than 16 chars");
+    });
   });
 });
