@@ -1,10 +1,10 @@
-const {test, describe, beforeEach} = require("node:test");
+const {test, describe, beforeEach, after} = require("node:test");
 const assert = require("node:assert");
 const User = require("../models/user");
 const helper = require("./user_api_helper");
 const app = require("../app");
 const api = require("supertest")(app);
-const bcrypt = require("bcrypt");
+const mongoose = require("mongoose");
 
 beforeEach(async () => {
   await User.deleteMany({});  
@@ -96,4 +96,8 @@ describe("testing the users api", () => {
       assert.strictEqual(result.body.error, "expected `username` length to be lower than 16 chars");
     });
   });
+});
+
+after(() => {
+  mongoose.connection.close();
 });
