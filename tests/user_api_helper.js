@@ -1,5 +1,4 @@
 const User = require("../models/user");
-const bcrypt = require("bcrypt");
 
 const initialUsers = [
   {
@@ -34,16 +33,6 @@ const initialUsers = [
   },
 ];
 
-const resetDbState = async () => {
-  await User.deleteMany({});  
-  let users = [];
-  for (const user of initialUsers) {
-    user.password = await bcrypt.hash(user.password, 10);
-    users.push(new User(user).save());
-  }
-  await Promise.all(users);
-};
-
 const usersInDb = async () => {
   const users = await User.find({});
   return users.map(u => u.toJSON());
@@ -54,4 +43,4 @@ const getTopFiveScoreUsers = async () => {
   return users.map(u => u.toJSON()).slice(Math.max(users.length-5, 0));
 };
 
-module.exports = {usersInDb, initialUsers, getTopFiveScoreUsers, resetDbState};
+module.exports = {usersInDb, initialUsers, getTopFiveScoreUsers};

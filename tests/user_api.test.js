@@ -7,8 +7,12 @@ const api = require("supertest")(app);
 const bcrypt = require("bcrypt");
 
 beforeEach(async () => {
-  helper.resetDbState();
+  await User.deleteMany({});  
+  const users = helper.initialUsers.map(u => new User(u));
+  const promisesArray = users.map(u => u.save());
+  await Promise.all(promisesArray);
 });
+
 describe("testing the users api", () => {
   describe("getting users", () => {
     test("get returns the correct number of users", async () => {
