@@ -80,7 +80,7 @@ describe("testing the users api", () => {
         .send(user)
         .expect(400)
         .expect("Content-Type", /application\/json/);
-      assert.strictEqual(result.body.error, "expected `username` length to be at least 3 chars");
+      assert.strictEqual(result.body.error, "User validation failed: username: length must be at least 3 chars");
     });
 
     describe("respond with status code 400 when adding a username with more than 16 chars", async () => {
@@ -93,7 +93,7 @@ describe("testing the users api", () => {
         .send(user)
         .expect(400)
         .expect("Content-Type", /application\/json/);
-      assert.strictEqual(result.body.error, "expected `username` length to be lower than 16 chars");
+      assert.strictEqual(result.body.error, "User validation failed: username: length must be lower than 16 chars");
     });
   });
 });

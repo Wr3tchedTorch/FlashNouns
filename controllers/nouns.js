@@ -21,6 +21,16 @@ nounsRouter
     const randomIndex = getRandomIndex(nouns.length);
     console.log(randomIndex);
     res.status(200).json(nouns[randomIndex]);
+  })
+  .post("/", async (req, res) => {
+    const body = req.body;
+    const noun = new Noun({
+      name: body.name,
+      gender: body.gender,
+      group: body.group
+    });
+    await noun.save();
+    res.status(201).json(noun);
   });
 
 module.exports = nounsRouter;
