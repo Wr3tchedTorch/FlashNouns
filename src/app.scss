@@ -66,7 +66,7 @@
 
 .correct-animation-filter {
     background-color: green !important;
-    animation: correct-animation-filter 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: correct-animation-filter 600ms cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
 }
 
 @keyframes correct-animation-filter {
@@ -79,18 +79,35 @@
 }
 
 .spawn-animation {
-	animation: spawn-animation 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+	animation: spawn-animation 200ms cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
 }
-  
-@keyframes spawn-animation {
+
+ @keyframes spawn-animation {
     0% {
-      transform: rotateX(-70deg);
+      transform: scale(.5);
       transform-origin: bottom;
-      opacity: 0;
     }
     100% {
-      transform: rotateX(0);
+        transform: scale(1);
       transform-origin: bottom;
-      opacity: 1;
+    }
+}
+
+.rainbow_text_animated {
+    background: linear-gradient(to right, #f2ff66, #0099ff , #00ff00, #ff3399, #ff0000);    
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    animation: rainbow_animation 6s ease-in-out infinite;
+    background-size: 400% 100%;
+}
+
+@keyframes rainbow_animation {
+    0%,100% {
+        background-position: 0 0;
+    }
+
+    50% {
+        background-position: 100% 0;
     }
 }

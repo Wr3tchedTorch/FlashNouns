@@ -1,15 +1,27 @@
 import { FlashCard } from "./components"
 import { useEffect, useState } from "react"
 import nounService from "./services/nounService";
-import FlashcardAnimation from "./components/FlashCard/FlashCardAnimation";
 import "./global.scss";
 import "./app.scss";
+
+import useWindowSize from 'react-use/lib/useWindowSize';
+import Confetti from 'react-confetti'
 
 function App() {
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
   const [noun, setNoun] = useState(null);
-  let fca;
+  const [flashcardAnimation, setFlashcardAnimation] = useState("");
+  const [playConfettiAnimation, setPlayConfettiAnimation] = useState(false);
+
+  const { width, height } = useWindowSize();
+
+  let correctAudio = new Audio("/sound/correct_answer.mp3");
+  correctAudio.volume = .7;
+  let wrongAudio = new Audio("/sound/wrong_answer.mp3");
+  wrongAudio.volume = .7;
+  let highScoreAudio = new Audio("/sound/high_score.mp3");
+  highScoreAudio.volume = .7;
 
   const fetchRandomNoun = async () => {
     const result = await nounService.getRandomNoun();
@@ -19,40 +31,66 @@ function App() {
   useEffect(() => {
     const highScoreLocal = window.localStorage.getItem("high_score");
     if (!highScoreLocal) return;
-
     setHighScore(highScoreLocal);
   }, [])
 
   useEffect(() => {
     if (noun === null) return;
-    fca = new FlashcardAnimation();  
-    fca.spawn();
+    setFlashcardAnimation("spawn-animation");
   }, [noun])
 
-  useEffect(() => {        
+  useEffect(() => {    
     fetchRandomNoun();
   }, [score])
 
   const onAnswerSubmit = (answer) => {
-    if (answer !== noun.gender) return handleWrongAnswer();
-
-    fca.correctAnswer(() => {
-      fca.spawn();
-      setScore(score + 1);
-    })
+    if (answer !== noun.gender) {
+      return setFlashcardAnimation("wrong-animation");
+    }
+    setFlashcardAnimation("correct-animation");
   }
-  
-  const handleWrongAnswer = () => {
-    fca.wrongAnswer(() => {
-      fca.spawn();
-      if (score === 0) return fetchRandomNoun();
-      setScore(0);
 
-      if (score <= highScore) return;
-      
-      setHighScore(score);
-      window.localStorage.setItem("high_score", score)
-    });
+  const onFlashcardAnimationEnd = () => {
+    switch (flashcardAnimation) {
+      case "correct-animation":
+        setFlashcardAnimation("spawn-animation");
+        setScore(score + 1);
+        if (score + 1 <= highScore) return;
+        window.localStorage.setItem("high_score", score+1);
+
+        if (playConfettiAnimation === "played" && score+1 !== 1) return;
+        setPlayConfettiAnimation("playing");                
+        setTimeout(() => highScoreAudio.play(), 300);
+        setTimeout(() => { setPlayConfettiAnimation("played"); }, 3000);
+        break;
+      case "wrong-animation":
+        setFlashcardAnimation("spawn-animation");
+        setPlayConfettiAnimation(false);
+        setScore(0);
+
+        if (score === 0) return fetchRandomNoun();
+        if (score <= highScore) return;
+        setHighScore(score);
+        window.localStorage.setItem("high_score", score);
+        break;
+      default: return
+    }
+  }
+
+  const onFlashcardAnimationStart = (e) => {
+    switch (flashcardAnimation) {      
+      case "correct-animation":        
+      case "wrong-animation":        
+        if (flashcardAnimation === "correct-animation") correctAudio.play();
+        else wrongAudio.play();
+        e.target.classList.remove("spawn-animation");
+        break;
+      case "spawn-animation":
+        e.target.classList.remove("correct-animation");
+        e.target.classList.remove("wrong-animation");
+        break;
+      default: return
+    }
   }
 
   return (
@@ -60,15 +98,26 @@ function App() {
       <div className="game-container">
         <div className="score-container">
           <div className="high-score">Hi. Score: {highScore}</div>
-          <div className="score">Score: {score}</div>
+          <div className={`score rainbow ${score >= 10 ? "rainbow_text_animated" : ""}`}>Score: {score}</div>
         </div>
         { noun !== null &&
         <FlashCard
           noun={noun.name}
           nounGroup={noun.group}
           submitAnswer={onAnswerSubmit}
+          
+          flashcardAnimationClass={flashcardAnimation}
+          onAnimationEnd={onFlashcardAnimationEnd}
+          onAnimationStart={onFlashcardAnimationStart}
         />}
       </div>
+      {playConfettiAnimation === "playing" && 
+      <Confetti 
+        width={width} 
+        height={height} 
+        gravity={0.15}
+        />
+      }      
     </>
   )
 }

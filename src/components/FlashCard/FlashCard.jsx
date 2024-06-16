@@ -1,11 +1,13 @@
 import "./index.scss";
 
-const FlashCard = ({noun, nounGroup, submitAnswer}) => {
+const FlashCard = ({noun, nounGroup, submitAnswer, onAnimationEnd, flashcardAnimationClass, onAnimationStart}) => {
+  let filterAnimationClass = flashcardAnimationClass === "" ? "" : `${flashcardAnimationClass}-filter`;  
+
   return (
-    <div className="flashcard shadow-drop-center" id="flashcard">
-    <div className="flashcard__filter" id="flashcard__filter"></div>
+    <div className={`flashcard shadow-drop-center ${flashcardAnimationClass}`} onAnimationEnd={onAnimationEnd} onAnimationStart={onAnimationStart}>
+    <div className={`flashcard__filter ${filterAnimationClass}`}></div>
       <div className="flashcard__head shadow-drop-bottom">
-        <div className="image" id="flashcard__head__image" style={{backgroundImage: `url("/public/groups/${nounGroup.toLowerCase()}.jpeg")`}}></div>
+        <div className="image" id="flashcard__head__image" style={{backgroundImage: `url("/groups/${nounGroup.toLowerCase()}.jpeg")`}}></div>
       </div>
       
       <div className="flashcard__title-container">
