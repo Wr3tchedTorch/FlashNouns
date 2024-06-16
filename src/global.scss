@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jaldi:wght@400;700&display=swap');
+
+$background-primary-color: #FFFAD7;
+$background-darker-color: #E97777;
+
+$button-primary: #FF9F9F;
+
+$title-font: "JetBrains Mono";
+$paragraph-font: "Jaldi";
+
+body {
+    background-color: $background-primary-color;
+}
+
+h1 {
+    font-size: 40px;
+    font-family: $title-font;
+}
+
+p, a {
+    font-size: 28px;
+    font-family: $paragraph-font;
+}
+
+a {  
+    color: #477AC7;
+}
+
+// Animations
+
+.shadow-drop-center {
+	-webkit-animation: shadow-drop-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: shadow-drop-center 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+ @-webkit-keyframes shadow-drop-center {
+    0% {
+      -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+              box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+    100% {
+      -webkit-box-shadow: 0 0 12px 0px rgba(0, 0, 0, 0.35);
+              box-shadow: 0 0 12px 0px rgba(0, 0, 0, 0.35);
+    }
+  }
+  @keyframes shadow-drop-center {
+    0% {
+      -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+              box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+    100% {
+      -webkit-box-shadow: 0 0 12px 0px rgba(0, 0, 0, 0.35);
+              box-shadow: 0 0 12px 0px rgba(0, 0, 0, 0.35);
+    }
+  }
+
+.shadow-drop-bottom {
+	-webkit-animation: shadow-drop-bottom 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: shadow-drop-bottom 0.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@-webkit-keyframes shadow-drop-bottom {
+    0% {
+      -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+              box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+    100% {
+      -webkit-box-shadow: 0 12px 12px -12px rgba(0, 0, 0, 0.35);
+              box-shadow: 0 12px 12px -12px rgba(0, 0, 0, 0.35);
+    }
+  }
+  @keyframes shadow-drop-bottom {
+    0% {
+      -webkit-box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+              box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+    100% {
+      -webkit-box-shadow: 0 12px 12px -12px rgba(0, 0, 0, 0.35);
+              box-shadow: 0 12px 12px -12px rgba(0, 0, 0, 0.35);
+    }
+  }
+  
+  

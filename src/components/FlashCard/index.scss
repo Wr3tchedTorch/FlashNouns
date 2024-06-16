@@ -1,0 +1,136 @@
+@import "../../global.scss";
+
+$card-background-color: #FCDDB0;
+ 
+.flashcard {
+    background-color: $card-background-color;    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+}
+
+.flashcard__head {    
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: end;
+    height: 330px;
+    background-color: $background-darker-color;
+    
+    .image {
+        width: 90%;
+        height: 92%;        
+        background-position: center center;
+        background-size: cover;
+    }
+}
+
+.flashcard__title-container {
+    width: 100%;
+    text-align: center;
+
+    .title {
+        font-family: 'JetBrains Mono';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 65px;
+        line-height: 0;
+        text-align: center;
+        letter-spacing: 0.05em;
+        color: rgba(72, 56, 30, 0.9);
+    }
+
+    .subtitle {
+        /* Group: Trees, fruits and flowers */
+        font-style: normal;
+        font-weight: 600;
+        font-size: 30px;
+        line-height: 25px;
+        text-align: center;
+        color: rgba(72, 56, 30, 0.7);
+
+        opacity: 80%;
+    }
+}
+
+.flashcard__button-container {
+    width: 100%;
+    display: flex;
+
+    .masculine-button,
+    .feminine-button,
+    .neuter-button 
+    {        
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 0px;
+        width: 33.333333333%;
+
+        transition: 300ms ease-in-out;
+        span {
+            font-family: 'JetBrains Mono';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 50px;
+            text-align: center;
+            color: #FFFFFF;
+        }
+    }
+    
+    .masculine-button {    
+        background: #669EE0;
+    }    
+    .feminine-button {    
+        background: #FB7DDF;           
+    }
+    .neuter-button {    
+        background: #F0FCFA;           
+        span {
+            color: #000;
+            opacity: 65%;
+        }
+    }
+
+    .masculine-button:hover,
+    .feminine-button:hover{
+        cursor: pointer;
+        filter: brightness(125%);
+    }
+
+    .neuter-button:hover {
+        cursor: pointer;
+        filter: brightness(75%);
+    }
+}
+
+.flashcard__filter {
+    position: absolute;
+    width: 100%;    
+    height: 660px;
+    z-index: 1;
+    background-color: red;
+    opacity: 0;
+    pointer-events: none;
+}
+
+@media screen and (max-width: 1226px) {
+    .flashcard {
+        width: 40%;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .flashcard {
+        width: 70%;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .flashcard {
+        width: 100%;
+    }
+}

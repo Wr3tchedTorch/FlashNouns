@@ -1,0 +1,96 @@
+.game-container {
+    width: 25%;
+    margin: auto;
+    margin-top: 10vh;
+}
+
+.score-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    .score,
+    .high-score {
+        font-family: 'JetBrains Mono';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 35px;
+        line-height: 42px;
+        text-align: center;
+        color: rgba(0, 0, 0, 0.5);
+    }
+}
+
+.wrong-animation {
+	animation: wrong-animation 250ms cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes wrong-animation {
+    0% {
+        transform: rotate(0);        
+        opacity: 1;
+    }
+    100% {
+        transform: rotate(45deg);            
+        opacity: 0;
+    }
+}
+
+.wrong-animation-filter {
+    animation: wrong-animation-filter 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes wrong-animation-filter {
+    0% {
+        opacity: .5;
+    }
+    100% {
+        opacity: 0;
+    }
+}  
+
+.correct-animation {
+	animation: correct-animation 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+}
+
+ @keyframes correct-animation {
+    0% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-1000px);
+      opacity: 0;
+    }
+}
+
+.correct-animation-filter {
+    background-color: green !important;
+    animation: correct-animation-filter 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes correct-animation-filter {
+    0% {        
+        opacity: .75;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.spawn-animation {
+	animation: spawn-animation 0.5s cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+}
+  
+@keyframes spawn-animation {
+    0% {
+      transform: rotateX(-70deg);
+      transform-origin: bottom;
+      opacity: 0;
+    }
+    100% {
+      transform: rotateX(0);
+      transform-origin: bottom;
+      opacity: 1;
+    }
+}
