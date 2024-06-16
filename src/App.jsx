@@ -17,6 +17,13 @@ function App() {
   }
 
   useEffect(() => {
+    const highScoreLocal = window.localStorage.getItem("high_score");
+    if (!highScoreLocal) return;
+
+    setHighScore(highScoreLocal);
+  }, [])
+
+  useEffect(() => {
     if (noun === null) return;
     fca = new FlashcardAnimation();  
     fca.spawn();
@@ -40,7 +47,11 @@ function App() {
       fca.spawn();
       if (score === 0) return fetchRandomNoun();
       setScore(0);
-      if (score > highScore) setHighScore(score);
+
+      if (score <= highScore) return;
+      
+      setHighScore(score);
+      window.localStorage.setItem("high_score", score)
     });
   }
 
