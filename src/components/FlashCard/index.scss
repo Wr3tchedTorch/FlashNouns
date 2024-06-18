@@ -3,11 +3,11 @@
 $card-background-color: #FCDDB0;
  
 .flashcard {
-    background-color: $card-background-color;    
+    background-color: $card-background-color;        
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 50px;
+    gap: 30px;
 }
 
 .flashcard__head {    
@@ -15,7 +15,7 @@ $card-background-color: #FCDDB0;
     display: flex;
     justify-content: center;
     align-items: end;
-    height: 330px;
+    height: 280px;
     background-color: $background-darker-color;
     
     .image {
@@ -42,7 +42,6 @@ $card-background-color: #FCDDB0;
     }
 
     .subtitle {
-        /* Group: Trees, fruits and flowers */
         font-style: normal;
         font-weight: 600;
         font-size: 30px;
@@ -117,20 +116,27 @@ $card-background-color: #FCDDB0;
     pointer-events: none;
 }
 
-@media screen and (max-width: 1226px) {
-    .flashcard {
-        width: 40%;
-    }
-}
-
-@media screen and (max-width: 800px) {
-    .flashcard {
-        width: 70%;
-    }
-}
-
 @media screen and (max-width: 400px) {
     .flashcard {
-        width: 100%;
+        gap: 11px;
+    }
+    .flashcard__head {
+        height: 150px;
+    }
+    .title {
+        font-size: 32px !important;
+    }
+    .subtitle {
+        font-size: 19px !important;
+    }
+    .masculine-button,
+    .feminine-button,
+    .neuter-button {
+        span {
+            font-size: 25px !important;
+        }
+    }    
+    .flashcard__filter {
+        height: 312px;
     }
 }

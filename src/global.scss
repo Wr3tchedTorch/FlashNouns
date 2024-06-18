@@ -11,6 +11,9 @@ $paragraph-font: "Jaldi";
 
 body {
     background-color: $background-primary-color;
+    padding: 0px;
+    margin: 0px;
+    height: 125vh;
 }
 
 h1 {
@@ -25,6 +28,7 @@ p, a {
 
 a {  
     color: #477AC7;
+    text-decoration: none;
 }
 
 // Animations

@@ -1,7 +1,6 @@
-import { FlashCard } from "./components"
+import { FlashCard, Navbar } from "./components"
 import { useEffect, useState } from "react"
 import nounService from "./services/nounService";
-import "./global.scss";
 import "./app.scss";
 
 import useWindowSize from 'react-use/lib/useWindowSize';
@@ -26,6 +25,7 @@ function App() {
   const fetchRandomNoun = async () => {
     const result = await nounService.getRandomNoun();
     setNoun(result.data);
+    setFlashcardAnimation("spawn-animation");
   }
 
   useEffect(() => {
@@ -33,11 +33,6 @@ function App() {
     if (!highScoreLocal) return;
     setHighScore(highScoreLocal);
   }, [])
-
-  useEffect(() => {
-    if (noun === null) return;
-    setFlashcardAnimation("spawn-animation");
-  }, [noun])
 
   useEffect(() => {    
     fetchRandomNoun();
@@ -57,9 +52,8 @@ function App() {
         setScore(score + 1);
         if (score + 1 <= highScore) return;
         window.localStorage.setItem("high_score", score+1);
-
-        if (playConfettiAnimation === "played" && score+1 !== 1) return;
-        setPlayConfettiAnimation("playing");                
+        if (playConfettiAnimation === "played" || score+1 === 1 || playConfettiAnimation === "playing") return;
+        setPlayConfettiAnimation("playing");
         setTimeout(() => highScoreAudio.play(), 300);
         setTimeout(() => { setPlayConfettiAnimation("played"); }, 3000);
         break;
@@ -67,7 +61,6 @@ function App() {
         setFlashcardAnimation("spawn-animation");
         setPlayConfettiAnimation(false);
         setScore(0);
-
         if (score === 0) return fetchRandomNoun();
         if (score <= highScore) return;
         setHighScore(score);
@@ -79,7 +72,7 @@ function App() {
 
   const onFlashcardAnimationStart = (e) => {
     switch (flashcardAnimation) {      
-      case "correct-animation":        
+      case "correct-animation":
       case "wrong-animation":        
         if (flashcardAnimation === "correct-animation") correctAudio.play();
         else wrongAudio.play();
@@ -95,6 +88,7 @@ function App() {
 
   return (
     <>    
+      <Navbar />
       <div className="game-container">
         <div className="score-container">
           <div className="high-score">Hi. Score: {highScore}</div>
