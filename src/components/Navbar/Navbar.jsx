@@ -10,7 +10,7 @@ const Navbar = () => {
         </div>
         <img src="/logo.svg" alt="" className="logo" />
         <div className="links">
-            <a href="" className="nav-link"><p>Play</p></a>
+            <a href="" className="nav-link active"><p>Play</p></a>
             <a href="" className="nav-link"><p>Leaderboard</p></a>
             <a href="" className="nav-link"><p>Help</p></a>
         </div>

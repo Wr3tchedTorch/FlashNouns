@@ -1,12 +1,16 @@
 import { Navbar } from "./components"
 import "./app.scss";
-import Play from "./pages/Play/Play";
+import { Route, Routes } from "react-router-dom";
+import { Login, Play } from "./pages";
 
 function App() {
   return (
-    <>    
-      <Navbar />
-      <Play />
+    <>        
+      <Navbar />      
+      <Routes>
+        <Route path="/" element={<Play/>} />
+        <Route path="/login" element={<Login/>} />
+      </Routes>
     </>
   )
 }
