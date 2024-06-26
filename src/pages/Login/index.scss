@@ -5,30 +5,65 @@
     margin: auto;
     margin-top: 125px;
     width: 25%;
-    height: 450px;
+    height: auto;
     animation: 500ms forwards shadow-drop-animation;
     padding: 20px 55px;
 
+    .background {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: auto;
+        height: 100vh;
+        z-index: -1;
+        display: flex;
+        flex-wrap: nowrap;
+
+        .bg-image {
+            width: 1440px;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-image: url("../../../public/haikei_backgrounds/circle-scatter-haikei.svg");
+            animation: float-left 200ms none infinite;
+        }
+    }
+    
     form {
         input {
-            width: 100%;
+            width: 95%;
             margin: 10px 0px;
             padding: 10px 0;
-            text-align: center;
+            padding-left: 4%;
 
             font-size: 20px;
             font-family: $paragraph-font;
             opacity: 0.8;
+            margin: 15px 0px;
         }
 
         button {
             width: 100%;
             margin: 0 0;
-            padding: 20px;
+            padding: 15px;
             border-radius: 0;
             background-color: $background-darker-color;
             color: #fff;
             border: 0;
+            transition: 200ms ease-in-out;
+        }
+
+        button:hover {
+            cursor: pointer;
+            scale: 1.05;
+            filter: brightness(125%);
+        }
+
+        p {
+            margin: 15px 0px;
+        }
+
+        a.guest-link {
+            font-size: 22px;            
         }
     }
 }

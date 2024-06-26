@@ -4,6 +4,11 @@ import "./index.scss";
 const Login = () => {
   return (
     <div className="login-container">
+        <div className="background">
+          <div className="bg-image"></div>
+          <div className="bg-image"></div>  
+          <div className="bg-image"></div>
+        </div>        
         <h1 className="title">Login</h1>
         <form action="">
             <input type="text" name="" id="" className="username-input" minLength={3} required placeholder='username'/>
