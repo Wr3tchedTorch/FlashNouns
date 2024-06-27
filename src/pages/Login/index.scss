@@ -1,5 +1,9 @@
 @import "../../global.scss";
 
+body {
+    overflow: hidden;
+}
+
 .login-container {
     background-color: white;
     margin: auto;
@@ -23,8 +27,19 @@
             width: 1440px;
             background-repeat: no-repeat;
             background-position: center center;
-            background-image: url("../../../public/haikei_backgrounds/circle-scatter-haikei.svg");
-            animation: float-left 200ms none infinite;
+            background-image: url("../../../public/haikei_backgrounds/circle-scatter-haikei-canvas-contained.svg");
+            animation: float-left 50s linear infinite;
+            filter: brightness(85%);            
+        }
+
+        @keyframes float-left {
+            0% {
+                transform: translateX(0);
+            }
+            
+            100% {
+                transform: translateX(100%);
+            }
         }
     }
     
