@@ -17,13 +17,13 @@ const FlashCard = ({noun, nounGroup, submitAnswer, onAnimationEnd, flashcardAnim
 
       <div className="flashcard__button-container">
         <div className="masculine-button" onClick={() => submitAnswer("masculine")}>
-          <span>M</span>
+          <span>Der</span>
         </div>
         <div className="feminine-button" onClick={() => submitAnswer("feminine")}>
-          <span>F</span>
+          <span>Die</span>
         </div>
         <div className="neuter-button" onClick={() => submitAnswer("neuter")}>
-          <span>N</span>
+          <span>Das</span>
         </div>
       </div>
     </div>

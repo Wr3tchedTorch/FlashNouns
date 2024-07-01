@@ -7,7 +7,7 @@ $nav-link-active: #fff;
     background-color: $background-darker-color;
     height: 50px;
     display: flex;
-    padding: 15px 100px;
+    padding: 15px 300px;
     align-items: center;
     justify-content: space-between;
     margin: auto;
@@ -18,32 +18,85 @@ $nav-link-active: #fff;
         top: 10px;
         margin-left:auto;
         margin-right:auto;
-        width: 180px;
+        width: 160px;
     }
     .social,
     .links {
         display: flex;
-        gap: 50px;
+        gap: 25px;
     }
     .social {
+        height: 34.0167px;
         img {
             transition: 200ms ease-in-out;
-            width: 40px;
+            width: 32.5px;
         }
         img:hover {
-            scale: 1.3;
+            scale: 1.25;
         }
     }
     .links {
         a {
             color: $nav-link;
             transition: 200ms ease-in-out;
+            font-size: 20px;
         }
         a.active {
             color: $nav-link-active;
         }
         a:hover {
             filter: brightness(200%);
+        }        
+    }
+    .menu-button {
+        visibility: hidden;
+    }
+}
+
+
+@media screen and (max-width: 1500px) {
+    .navbar {
+        padding: 15px 80px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .navbar {
+        .collapse-open,
+        .collapse-closed {
+            display: flex;
+            align-items: center;            
+            flex-wrap: wrap;
+            width: 100px;
+            background-color: $background-darker-color;
+            gap: 0px;
+            padding: 20px 50px;
+            position: absolute;
+            right: 85px;
+            z-index: 999;
+            a {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 45px;
+            }
+            transition: 200ms linear;
         }
+
+        .collapse-closed {
+            top: -200px;
+        }
+        .collapse-open {
+            top: 80px;
+        }
+    }
+
+    .menu-button {
+        visibility: visible !important; 
+        transition: 100ms linear;
+    }
+    .menu-button:hover {
+        cursor: pointer;
+        scale: 1.15;
     }
 }

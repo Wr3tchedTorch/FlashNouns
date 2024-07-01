@@ -15,7 +15,7 @@ $card-background-color: #FCDDB0;
     display: flex;
     justify-content: center;
     align-items: end;
-    height: 280px;
+    height: 225px;
     background-color: $background-darker-color;
     
     .image {
@@ -34,7 +34,7 @@ $card-background-color: #FCDDB0;
         font-family: 'JetBrains Mono';
         font-style: normal;
         font-weight: 400;
-        font-size: 65px;
+        font-size: 45px;
         line-height: 0;
         text-align: center;
         letter-spacing: 0.05em;
@@ -44,7 +44,7 @@ $card-background-color: #FCDDB0;
     .subtitle {
         font-style: normal;
         font-weight: 600;
-        font-size: 30px;
+        font-size: 22px;
         line-height: 25px;
         text-align: center;
         color: rgba(72, 56, 30, 0.7);
@@ -74,7 +74,7 @@ $card-background-color: #FCDDB0;
             font-family: 'JetBrains Mono';
             font-style: normal;
             font-weight: 400;
-            font-size: 50px;
+            font-size: 30px;
             text-align: center;
             color: #FFFFFF;
         }
@@ -109,7 +109,7 @@ $card-background-color: #FCDDB0;
 .flashcard__filter {
     position: absolute;
     width: 100%;    
-    height: 568px;
+    height: 100%;
     z-index: 1;
     background-color: red;
     opacity: 0;

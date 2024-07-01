@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
+import { FlashCard } from "../../components";
 import nounService from "../../services/nounService";
 import Confetti from "react-confetti";
 import useWindowSize from "react-use/lib/useWindowSize";
-import { FlashCard } from "../../components";
+import "./index.scss";
 
 const Play = () => {
   const [score, setScore] = useState(0);
