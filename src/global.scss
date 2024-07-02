@@ -30,6 +30,15 @@ a {
     text-decoration: none;
 }
 
+.error {
+  color: rgb(199, 9, 9); 
+  background-color: rgb(255, 220, 224);
+  padding: 5px 15px;
+  border-radius: 10px;
+  border: 2px solid rgb(253, 148, 148);
+  font-size: 17px;
+}
+
 // Animations
 
 .shadow-drop-center {

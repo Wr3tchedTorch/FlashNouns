@@ -2,16 +2,24 @@ import React, { useState } from 'react';
 import loginService from "../../services/loginService";
 import "./index.scss";
 
+import { FaEyeSlash } from "react-icons/fa6";
+import { FaEye } from "react-icons/fa";
+
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordVisible, setPasswordVisible] = useState(false);
   const [error, setError] = useState(false);
 
   const handleLogin = async (e) => {
     e.preventDefault();    
     try {
-      const response = await loginService.login(username, password);          
+      const response = await loginService.login(username, password);
       console.log(response);
+      localStorage.setItem("user-token", response.token);
+      localStorage.setItem("username", response.username);
+      setError(false);
+      alert(`parabens! você está logado como ${response.username}`);
     } catch (error) {
       setError(true);
       console.log("error ao fazer login: ", error.message, "\nmessage: ", error.response.data.error);
@@ -25,11 +33,15 @@ const Login = () => {
           <div className="bg-image"></div>  
           <div className="bg-image"></div>
         </div>        
-        {error && <h1 style={{backgroundColor: "red"}}>Erro ao fazer login, tente novamente.</h1>}
         <h1 className="title">Login</h1>
         <form onSubmit={handleLogin}>          
             <input type="text" name="" id="" className="username-input" minLength={3} required placeholder='username' value={username} onChange={(e) => setUsername(e.target.value)}/>
-            <input type="password" name="" id="" className="password-input" minLength={6} required placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
+            <div className="password-input">
+              <input type={passwordVisible ? "text" : "password"} name="" id="" className="password-input" minLength={6} required placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)}/>              
+              {passwordVisible ? <FaEyeSlash  className="FaEyeSlash" onClick={() => setPasswordVisible(false)} size={35}/> :
+                                 <FaEye className="FaEye" onClick={() => setPasswordVisible(true)} size={35}/>}
+            </div>
+            {error && <p className="error">Nome de usuário ou senha invalidos.</p>}
             <button type="submit" className="login-button">Login</button>
             <p><a href="" className="guest-link">Continue as Guest</a></p>
         </form>

@@ -7,11 +7,11 @@ body {
 .login-container {
     background-color: white;
     margin: auto;
-    margin-top: 125px;
+    margin-top: 20vh;
     width: 25%;
     height: auto;
     animation: 500ms forwards shadow-drop-animation;
-    padding: 20px 55px;
+    padding: 20px 55px;    
 
     .background {
         position: absolute;
@@ -29,7 +29,7 @@ body {
             background-position: center center;
             background-image: url("../../../public/haikei_backgrounds/circle-scatter-haikei-canvas-contained.svg");
             animation: float-left 50s linear infinite;
-            filter: brightness(85%);            
+            filter: brightness(90%) opacity(.5);
         }
 
         @keyframes float-left {
@@ -46,15 +46,43 @@ body {
     form {
         input {
             width: 95%;
-            margin: 10px 0px;
             padding: 10px 0;
             padding-left: 4%;
-
             font-size: 20px;
             font-family: $paragraph-font;
             opacity: 0.8;
             margin: 15px 0px;
         }
+
+        .password-input {
+            display: flex;
+            flex-wrap: nowrap;
+            border: 1px solid rgb(140, 140, 140);
+            opacity: .8;
+            align-items: center;
+            padding: 0px 10px;
+            margin: 15px 0;
+
+            input {
+                flex-grow: 2;
+                border: none;
+            }
+
+            input:focus {
+                outline: none;
+            }
+
+            .FaEyeSlash,
+            .FaEye {
+                cursor: pointer;
+                opacity: .7;
+            }
+        }
+
+        .password-input:focus-within {
+            outline: 1px solid blue;
+        }
+
 
         button {
             width: 100%;
@@ -78,7 +106,7 @@ body {
         }
 
         a.guest-link {
-            font-size: 22px;            
+            font-size: 20px;
         }
     }
 }
@@ -89,5 +117,18 @@ body {
     }
     100% {
         box-shadow: -2px 4px 13px -1px rgba(0,0,0,0.33);
+    }
+}
+
+@media screen and (max-width: 1300px) {
+    .login-container {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .login-container {
+        width: 65%;
+        margin-top: 15vh;
     }
 }
