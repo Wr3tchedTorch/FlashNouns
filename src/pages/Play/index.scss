@@ -1,25 +1,28 @@
+@import "../../global.scss";
+
 .game-container {
     width: 24%;
     margin: auto;
-    margin-top: 10vh;
-}
-
-.score-container {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    .score,
-    .high-score {
-        font-family: 'JetBrains Mono';
-        font-style: normal;
-        font-weight: 400;
-        font-size: 22px;
-        line-height: 42px;
-        text-align: center;
-        color: rgba(0, 0, 0, 0.5);
+    margin-top: 25vh;    
+    .score-container {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        .score,
+        .high-score {
+            font-family: 'JetBrains Mono';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 22px;
+            line-height: 42px;
+            text-align: center;
+            color: rgba(0, 0, 0, 0.5);
+        }
     }
 }
+
+
 
 .wrong-animation {
 	animation: wrong-animation 250ms cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
@@ -50,16 +53,16 @@
 }  
 
 .correct-animation {
-	animation: correct-animation 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+    animation: correct-animation 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
 }
 
- @keyframes correct-animation {
+@keyframes correct-animation {
     0% {
       transform: translateY(0);
       opacity: 1;
     }
     100% {
-      transform: translateY(-1000px);
+        transform: translateY(-1000px);
       opacity: 0;
     }
 }
@@ -79,17 +82,17 @@
 }
 
 .spawn-animation {
-	animation: spawn-animation 200ms cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
+    animation: spawn-animation 200ms cubic-bezier(0.175, 0.885, 0.320, 1.275) both;
 }
 
- @keyframes spawn-animation {
+@keyframes spawn-animation {
     0% {
-      transform: scale(.5);
-      transform-origin: bottom;
+        transform: scale(.5);
+        transform-origin: bottom;
     }
     100% {
         transform: scale(1);
-      transform-origin: bottom;
+        transform-origin: bottom;
     }
 }
 
@@ -145,5 +148,66 @@
     .score,
     .high-score {
         font-size: 16px !important;
+    }
+}
+
+.settings-container-closed {
+    top: -110px;
+}
+
+.settings-container-open {
+    top: 80px;
+}
+
+.settings-container-open,
+.settings-container-closed {
+    transition: 200ms ease-in-out;
+    position: absolute;
+    margin-left: 300px;    
+    z-index: 1;
+    form {
+        background-color: $background-darker-color;
+        padding: 10px 40px;        
+    }
+
+    .settings-btn {    
+        background-color: $button-primary;
+        cursor: pointer;
+        padding: 8px;
+        width: fit-content;
+        .gear {
+            scale: .8;
+        }
+    }
+    
+    .settings-btn:hover {    
+        .gear {
+            animation: rotate-center 300ms ease-in-out both;
+        }
+    }    
+
+    @keyframes rotate-center {
+        0% {
+          transform: rotate(0);
+        }
+        100% {
+            scale: .85;        
+          transform: rotate(90deg);
+        }
+    }
+} 
+  
+
+@media screen and (max-width: 1500px) {
+    .settings-container-open,      
+    .settings-container-closed {
+        margin-left: 80px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .settings-container-open,   
+    .settings-container-closed { 
+        margin-left: 15px;
     }
 }

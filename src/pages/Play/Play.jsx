@@ -13,6 +13,8 @@ const Play = () => {
   const [playConfettiAnimation, setPlayConfettiAnimation] = useState(false);
   const { width, height } = useWindowSize();
 
+  const [settingsMenuOpen, setSettingsMenuOpen] = useState(false);
+
   let correctAudio = new Audio("/sound/correct_answer.mp3");
   correctAudio.volume = 0.7;
   let wrongAudio = new Audio("/sound/wrong_answer.mp3");
@@ -76,25 +78,25 @@ const Play = () => {
     }
   };
 
-  const onFlashcardAnimationStart = (e) => {
-    switch (flashcardAnimation) {
-      case "correct-animation":
-      case "wrong-animation":
-        if (flashcardAnimation === "correct-animation") correctAudio.play();
-        else wrongAudio.play();
-        e.target.classList.remove("spawn-animation");
-        break;
-      case "spawn-animation":
-        e.target.classList.remove("correct-animation");
-        e.target.classList.remove("wrong-animation");
-        break;
-      default:
-        return;
-    }
+  const onFlashcardAnimationStart = () => {
+    if (flashcardAnimation === "correct-animation") return correctAudio.play();
+    if (flashcardAnimation === "wrong-animation") wrongAudio.play();
   };
 
   return (
     <section>
+      <div className={settingsMenuOpen ? "settings-container-open" : "settings-container-closed"}>
+        <form action="">
+          <p>Disable Animations</p>
+          <p>Disable Animations</p>
+          <p>Disable Animations</p>
+          <button>Login</button>
+          <button>Sign Up</button>
+        </form>
+        <div className="settings-btn" onClick={() => setSettingsMenuOpen(!settingsMenuOpen)}>
+          <img src="/gear.svg" alt=""  className="gear"/>
+        </div>
+      </div>
       <div className="game-container">
         <div className="score-container">
           <div className="high-score">Hi. Score: {highScore}</div>
