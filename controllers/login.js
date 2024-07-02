@@ -12,9 +12,6 @@ loginRouter
     if (!passwordIsValid || !user) {
       return res.status(401).json({error: "invalid username or password"});
     }
-    console.log(user);
-    console.log(await bcrypt.compare(password, user.password));
-    
     const userForToken = {
       username: user.username,
       id: user._id
