@@ -15,13 +15,13 @@ const errorHandler = (err, req, res, next) => {
     return res.status(400).json({error: err.message});
   } 
 
-  if (err.name.includes("JsonWebTokenError") && err.message.includes("invalid token")) {
-    return res.status(400).json({error: "token invalid."});
+  if (err.name.includes("JsonWebTokenError") && (err.message.includes("invalid token") || err.message.includes("jwt malformed"))) {
+    return res.status(400).json({message: "error: token invalid."});
   } 
 
   if (err.name.includes("Error") && err.message.includes("score must be higher or equal do zero.")) {
     return res.status(400).json({error: "score must be higher or equal to zero."});
-  }
+  }  
 
   next(err);
 };
