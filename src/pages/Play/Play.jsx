@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FlashCard } from "../../components";
+import { FlashCard, SettingsMenu } from "../../components";
 import nounService from "../../services/nounService";
 import Confetti from "react-confetti";
 import useWindowSize from "react-use/lib/useWindowSize";
@@ -12,8 +12,6 @@ const Play = () => {
   const [flashcardAnimation, setFlashcardAnimation] = useState("");
   const [playConfettiAnimation, setPlayConfettiAnimation] = useState(false);
   const { width, height } = useWindowSize();
-
-  const [settingsMenuOpen, setSettingsMenuOpen] = useState(false);
 
   let correctAudio = new Audio("/sound/correct_answer.mp3");
   correctAudio.volume = 0.7;
@@ -85,18 +83,8 @@ const Play = () => {
 
   return (
     <section>
-      <div className={settingsMenuOpen ? "settings-container-open" : "settings-container-closed"}>
-        <form action="">
-          <p>Disable Animations</p>
-          <p>Disable Animations</p>
-          <p>Disable Animations</p>
-          <button>Login</button>
-          <button>Sign Up</button>
-        </form>
-        <div className="settings-btn" onClick={() => setSettingsMenuOpen(!settingsMenuOpen)}>
-          <img src="/gear.svg" alt=""  className="gear"/>
-        </div>
-      </div>
+      <SettingsMenu />
+
       <div className="game-container">
         <div className="score-container">
           <div className="high-score">Hi. Score: {highScore}</div>

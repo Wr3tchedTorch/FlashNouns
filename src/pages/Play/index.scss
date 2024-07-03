@@ -3,7 +3,7 @@
 .game-container {
     width: 24%;
     margin: auto;
-    margin-top: 25vh;    
+    margin-top: 20vh;    
     .score-container {
         width: 100%;
         display: flex;
@@ -146,66 +146,5 @@
     .score,
     .high-score {
         font-size: 16px !important;
-    }
-}
-
-.settings-container-closed {
-    top: -110px;
-}
-
-.settings-container-open {
-    top: 80px;
-}
-
-.settings-container-open,
-.settings-container-closed {
-    transition: 200ms ease-in-out;
-    position: absolute;
-    margin-left: 300px;    
-    z-index: 1;
-    form {
-        background-color: $background-darker-color;
-        padding: 10px 40px;        
-    }
-
-    .settings-btn {    
-        background-color: $button-primary;
-        cursor: pointer;
-        padding: 8px;
-        width: fit-content;
-        .gear {
-            scale: .8;
-        }
-    }
-    
-    .settings-btn:hover {    
-        .gear {
-            animation: rotate-center 300ms ease-in-out both;
-        }
-    }    
-
-    @keyframes rotate-center {
-        0% {
-          transform: rotate(0);
-        }
-        100% {
-            scale: .85;        
-          transform: rotate(90deg);
-        }
-    }
-} 
-  
-
-@media screen and (max-width: 1500px) {
-    .settings-container-open,      
-    .settings-container-closed {
-        margin-left: 80px;
-    }
-}
-
-@media screen and (max-width: 700px) {
-    .settings-container-open,   
-    .settings-container-closed { 
-        margin-left: 15px;
     }
 }

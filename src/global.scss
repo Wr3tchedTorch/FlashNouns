@@ -93,4 +93,17 @@ a {
     }
   }
   
-  
+button {
+    background-color: $button-primary;
+    border: none;
+    padding: 10px 15px;
+    color: #fff;
+    font-size: 17px;
+    transition: 200ms ease-in-out;
+}    
+
+button:hover {
+  filter: brightness(125%);
+  scale: 1.1;
+  cursor: pointer;
+}
