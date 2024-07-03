@@ -13,4 +13,13 @@ const create = async (username, password) => {
     return response.data;
 }
 
-export default {getTopFive, create};
+const validateToken = async (token) => {
+    const response = await axios.post(`${baseURL}/validateToken`, {token: token});    
+    
+    if (response.data.message.includes("error: token invalid.")) {
+        return false;
+    }
+    return true;
+}
+
+export default {getTopFive, create, validateToken};

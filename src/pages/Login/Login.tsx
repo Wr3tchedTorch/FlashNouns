@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import loginService from "../../services/loginService";
 import "./index.scss";
-
 import { FaEyeSlash } from "react-icons/fa6";
 import { FaEye } from "react-icons/fa";
+import { useNavigate } from 'react-router-dom';
+import usersService from '../../services/usersService';
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -11,7 +12,18 @@ const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [error, setError] = useState(false);
 
-  const handleLogin = async (e) => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    let token = localStorage.getItem("user-token");
+    if (token === null) return;
+
+    usersService.validateToken(token).then(result => {
+      if (result) navigate("/", {replace: true});
+    })
+  }, []);
+
+  const handleLogin = async (e) => {    
     e.preventDefault();    
     try {
       const response = await loginService.login(username, password);
@@ -19,7 +31,7 @@ const Login = () => {
       localStorage.setItem("user-token", response.token);
       localStorage.setItem("username", response.username);
       setError(false);
-      alert(`parabens! você está logado como ${response.username}`);
+      navigate("/", {replace: true});
     } catch (error) {
       setError(true);
       console.log("error ao fazer login: ", error.message, "\nmessage: ", error.response.data.error);
