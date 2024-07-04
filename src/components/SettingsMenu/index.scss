@@ -51,7 +51,7 @@
     }
   }
 
-  .switch-group {
+  .switch-group, p {
     display: flex;
     align-items: center;
     color: #fff;
@@ -65,12 +65,20 @@
     }
   }
 
-  .button-group {
+  .button-group {    
     display: flex;
     justify-content: space-between;
     width: 100%;
-    button {
-      width: 48%;
+    a {
+      width: 50%;
+      display: flex;
+      justify-content: center;
+    }
+    a button, p, button {
+      width: 85%;
+    }
+    p {
+      margin: 0;
     }
   }
 }
@@ -105,8 +113,8 @@
         .button-group {
             justify-content: center !important;
             gap: 10px !important;
-            button {
-                width: 40% !important;                
+            a button, button, p {
+                width: 80% !important;
             }
         }
     }
