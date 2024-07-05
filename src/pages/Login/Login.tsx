@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import loginService from "../../services/loginService";
 import { FaEyeSlash } from "react-icons/fa6";
 import { FaEye } from "react-icons/fa";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import "./index.scss";
 
 const Login = () => {
@@ -31,9 +31,9 @@ const Login = () => {
   return (
     <div className="login-container">
         <div className="background">
-          <div className="bg-image"></div>
-          <div className="bg-image"></div>  
-          <div className="bg-image"></div>
+          <div className="bg-image-login"></div>
+          <div className="bg-image-login"></div>  
+          <div className="bg-image-login"></div>
         </div>        
         <h1 className="title">Login</h1>
         <form onSubmit={handleLogin}>          
@@ -45,7 +45,10 @@ const Login = () => {
             </div>
             {error && <p className="error">Nome de usuário ou senha invalidos.</p>}
             <button type="submit" className="login-button">Login</button>
-            <p><a href="" className="guest-link">Continue as Guest</a></p>
+            <div className="links">
+              <p><Link className='guest-link' to={"/"}>Continue as Guest</Link></p>
+              <p><Link className='guest-link' to={"/signUp"}>create account</Link></p>
+            </div>
         </form>
     </div>
   )

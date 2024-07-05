@@ -12,13 +12,22 @@ const create = async (username, password) => {
     return response.data;
 }
 
+const updateScore = async (token, score) => {
+    const response = await axios.patch(`${baseURL}/updateScore`, {token, score})
+    return response.data;
+}
+
 const validateToken = async (token) => {
-    const response = await axios.post(`${baseURL}/validateToken`, {token: token});    
-    
+    const response = await axios.post(`${baseURL}/validateToken`, {token: token});       
     if (response.data.message.includes("error: token invalid.")) {
         return false;
     }
     return true;
 }
 
-export default {getTopFive, create, validateToken};
+const getUserScore = async (token) => {
+    const response = await axios.post(`${baseURL}/getScore`, {token: token});       
+    return response.data;
+}
+
+export default {getTopFive, create, validateToken, updateScore, getUserScore};

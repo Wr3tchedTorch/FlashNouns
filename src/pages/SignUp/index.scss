@@ -23,11 +23,11 @@ body {
         display: flex;
         flex-wrap: nowrap;
 
-        .bg-image {
+        .bg-image-signup {
             width: 1440px;
             background-repeat: no-repeat;
             background-position: center center;
-            background-image: url("../../../public/haikei_backgrounds/circle-scatter-haikei-canvas-contained.svg");
+            background-image: url("/haikei_backgrounds/polygon-scatter-haikei.svg");
             animation: float-left 50s linear infinite;
             filter: brightness(90%) opacity(.5);
         }

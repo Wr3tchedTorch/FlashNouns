@@ -4,6 +4,7 @@ import nounService from "../../services/nounService";
 import Confetti from "react-confetti";
 import useWindowSize from "react-use/lib/useWindowSize";
 import "./index.scss";
+import usersService from "../../services/usersService";
 
 const Play = () => {
   const [score, setScore] = useState(0);
@@ -26,10 +27,23 @@ const Play = () => {
     setFlashcardAnimation("spawn-animation");
   };
 
-  useEffect(() => {
+  const getServerScore = async () => {
+    const token = window.localStorage.getItem("user-token");
+    if (token !== null) {
+      const response = await usersService.getUserScore(token);
+      console.log(response);
+      window.localStorage.setItem("high_score", response);
+      setHighScore(response);
+      return;
+    }
+
     const highScoreLocal = window.localStorage.getItem("high_score");
     if (!highScoreLocal) return;
     setHighScore(highScoreLocal);
+  };
+
+  useEffect(() => {
+    getServerScore();    
   }, []);
 
   useEffect(() => {
@@ -43,12 +57,22 @@ const Play = () => {
     setFlashcardAnimation("correct-animation");
   };
 
+  const updateHighScore = async () => {
+    const token = window.localStorage.getItem("user-token");
+    if (token !== null) {
+      const response = await usersService.updateScore(token, score + 1);
+      console.log(response);
+    }
+  };
+
   const onFlashcardAnimationEnd = () => {
     switch (flashcardAnimation) {
       case "correct-animation":
         setFlashcardAnimation("spawn-animation");
         setScore(score + 1);
+
         if (score + 1 <= highScore) return;
+
         window.localStorage.setItem("high_score", score + 1);
         if (
           playConfettiAnimation === "played" ||
@@ -56,6 +80,7 @@ const Play = () => {
           playConfettiAnimation === "playing"
         )
           return;
+        
         setPlayConfettiAnimation("playing");
         setTimeout(() => highScoreAudio.play(), 300);
         setTimeout(() => {
@@ -63,6 +88,7 @@ const Play = () => {
         }, 3000);
         break;
       case "wrong-animation":
+        updateHighScore();
         setFlashcardAnimation("spawn-animation");
         setPlayConfettiAnimation(false);
         setScore(0);

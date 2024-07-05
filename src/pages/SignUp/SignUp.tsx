@@ -3,7 +3,7 @@ import loginService from "../../services/loginService";
 import "./index.scss";
 import { FaEyeSlash } from "react-icons/fa6";
 import { FaEye } from "react-icons/fa";
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import usersService from '../../services/usersService';
 
 const SignUp = () => {
@@ -32,9 +32,9 @@ const SignUp = () => {
   return (
     <div className="login-container">
         <div className="background">
-          <div className="bg-image"></div>
-          <div className="bg-image"></div>  
-          <div className="bg-image"></div>
+          <div className="bg-image-signup"></div>
+          <div className="bg-image-signup"></div>  
+          <div className="bg-image-signup"></div>
         </div>        
         <h1 className="title">Sign Up</h1>
         <form onSubmit={handleSignUp}>          
@@ -46,7 +46,10 @@ const SignUp = () => {
             </div>
             {error && <p className="error">Erro ao fazer cadastro, nome de usuário ou senha invalidos.</p>}
             <button type="submit" className="login-button">Sign Up</button>
-            <p><a href="" className="guest-link">Continue as Guest</a></p>
+            <div className="links">
+              <p><Link className='guest-link' to={"/"}>Continue as Guest</Link></p>
+              <p><Link className='guest-link' to={"/login"}>login</Link></p>
+            </div>
         </form>
     </div>
   )
