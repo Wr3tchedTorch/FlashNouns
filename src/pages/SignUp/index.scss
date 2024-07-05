@@ -1,0 +1,136 @@
+@import "../../global.scss";
+
+body {
+    overflow: hidden;
+}
+
+.login-container {
+    background-color: white;
+    margin: auto;
+    margin-top: 20vh;
+    width: 25%;
+    height: auto;
+    animation: 500ms forwards shadow-drop-animation;
+    padding: 20px 55px;    
+
+    .background {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: auto;
+        height: 100vh;
+        z-index: -1;
+        display: flex;
+        flex-wrap: nowrap;
+
+        .bg-image {
+            width: 1440px;
+            background-repeat: no-repeat;
+            background-position: center center;
+            background-image: url("../../../public/haikei_backgrounds/circle-scatter-haikei-canvas-contained.svg");
+            animation: float-left 50s linear infinite;
+            filter: brightness(90%) opacity(.5);
+        }
+
+        @keyframes float-left {
+            0% {
+                transform: translateX(0);
+            }
+            
+            100% {
+                transform: translateX(100%);
+            }
+        }
+    }
+    
+    form {
+        width: 100% !important;
+
+        input {
+            width: 95%;
+            padding: 10px 0;
+            padding-left: 4%;
+            font-size: 20px;
+            font-family: $paragraph-font;
+            opacity: 0.8;
+            margin: 15px 0px;
+        }
+
+        .password-input {
+            display: flex;
+            flex-wrap: nowrap;
+            border: 1px solid rgb(140, 140, 140);
+            opacity: .8;
+            align-items: center;
+            padding: 0px 10px;
+            margin: 15px 0;
+
+            input {
+                flex-grow: 2;
+                border: none;
+            }
+
+            input:focus {
+                outline: none;
+            }
+
+            .FaEyeSlash,
+            .FaEye {
+                cursor: pointer;
+                opacity: .7;
+            }
+        }
+
+        .password-input:focus-within {
+            outline: 1px solid blue;
+        }
+
+
+        button {
+            width: 100%;
+            margin: 0 0;
+            padding: 15px;
+            border-radius: 0;
+            background-color: $background-darker-color;
+            color: #fff;
+            border: 0;
+            transition: 200ms ease-in-out;
+        }
+
+        button:hover {
+            cursor: pointer;
+            scale: 1.05;
+            filter: brightness(125%);
+        }
+
+        p {
+            margin: 15px 0px;
+        }
+
+        a.guest-link {
+            font-size: 20px;
+        }
+    }
+}
+
+@keyframes shadow-drop-animation {
+    0% {
+        box-shadow: none;
+    }
+    100% {
+        box-shadow: -2px 4px 13px -1px rgba(0,0,0,0.33);
+    }
+}
+
+@media screen and (max-width: 1300px) {
+    .login-container {
+        width: 50%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .login-container {
+        width: 65%;
+        margin-top: 15vh;
+    }
+}

@@ -43,7 +43,7 @@ const SettingsMenu = () => {
           {isLogged ? 
           <div className="button-group">
             <p>{username}.</p>
-            <button onClick={signOut}>Sign out</button>
+            <button onClick={signOut}>Logout</button>
           </div> :
           <div className="button-group">
               <Link to={"/login"}><button>Login</button></Link>
