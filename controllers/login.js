@@ -14,6 +14,7 @@ loginRouter
     }
     const userForToken = {
       username: user.username,
+      score: user.score,
       id: user._id
     };
     const token = jwt.sign(userForToken, process.env.SECRET);

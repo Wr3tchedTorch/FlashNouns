@@ -30,9 +30,7 @@ userRouter
     if (score < 0) {
       throw new Error("score must be higher or equal do zero.");
     }
-
     const user = jwt.verify(token, process.env.SECRET);
-
     const updatedUser = await User.findOneAndUpdate({ _id: user.id }, { score: score }, {new: true});
     res.status(200).json(updatedUser);
   })
@@ -40,6 +38,11 @@ userRouter
     const token = req.body.token;
     const user = jwt.verify(token, process.env.SECRET);    
     res.json({message: "success: token valid."});
+  })
+  .post("/getScore", async (req, res) => {
+    const token = req.body.token;
+    const user = jwt.verify(token, process.env.SECRET);    
+    res.json(user.score);
   });
 
 module.exports = userRouter;
