@@ -60,7 +60,7 @@ const Play = () => {
   const updateHighScore = async () => {
     const token = window.localStorage.getItem("user-token");
     if (token !== null) {
-      const response = await usersService.updateScore(token, score + 1);
+      const response = await usersService.updateScore(token, score);
       console.log(response);
     }
   };
