@@ -14,6 +14,7 @@ mongoose.connect(config.MONGODB_URL).catch(error => {
   console.log(error);
 });
 
+app.use(express.static("./dist"));
 app.use(cors());
 app.use(express.json());
 app.use("/api/users", userRouter);
