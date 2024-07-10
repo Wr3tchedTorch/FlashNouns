@@ -1,7 +1,7 @@
 @import "../../global.scss";
 
 .settings-container-closed {
-  top: -140px;
+  top: -90px;
 }
 
 .settings-container-open {
@@ -10,13 +10,14 @@
 
 .settings-container-open,
 .settings-container-closed {
+  width: 1000px;
   transition: 200ms ease-in-out;
   position: absolute;
   margin-left: 300px;
   z-index: 1;
   form {
     background-color: $background-darker-color;
-    padding: 15px 45px;
+    padding: 15px 40px;
     display: flex;
     flex-wrap: wrap;
     width: 25%;

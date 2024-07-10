@@ -1,9 +1,9 @@
 import "./index.scss"
 
-const Switch = ({onClick}) => {  
+const Switch = ({onSwitch}) => {  
   return (
-    <label className="switch" onClick={() => onClick}>
-        <input type="checkbox"/>
+    <label className="switch">
+        <input type="checkbox" onClick={onSwitch}/>
         <span className="slider round"></span>
     </label>
   )

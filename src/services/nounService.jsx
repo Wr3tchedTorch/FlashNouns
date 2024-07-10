@@ -6,4 +6,9 @@ const getRandomNoun = async () => {
     return noun;
 }
 
-export default {getRandomNoun};
+const getNouns = async () => {
+    const response = await axios.get(baseUrl);
+    return response.data
+}
+
+export default {getRandomNoun, getNouns};

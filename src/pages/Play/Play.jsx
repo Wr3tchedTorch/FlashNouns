@@ -6,13 +6,17 @@ import useWindowSize from "react-use/lib/useWindowSize";
 import "./index.scss";
 import usersService from "../../services/usersService";
 
-const Play = () => {
+const Play = ({nouns}) => {
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
   const [noun, setNoun] = useState(null);
   const [flashcardAnimation, setFlashcardAnimation] = useState("");
   const [playConfettiAnimation, setPlayConfettiAnimation] = useState(false);
   const { width, height } = useWindowSize();
+  const [config, setConfig] = useState({
+    disableAnimations: false,
+    hideNounGroup: false
+  });
 
   let correctAudio = new Audio("/sound/correct_answer.mp3");
   correctAudio.volume = 0.7;
@@ -21,9 +25,9 @@ const Play = () => {
   let highScoreAudio = new Audio("/sound/high_score.mp3");
   highScoreAudio.volume = 0.7;
 
-  const fetchRandomNoun = async () => {
-    const result = await nounService.getRandomNoun();
-    setNoun(result.data);
+  const getRandomNoun = () => {    
+    const randomIndex = Math.floor(Math.random() * nouns.length);
+    setNoun(nouns[randomIndex]);
     setFlashcardAnimation("spawn-animation");
   };
 
@@ -31,7 +35,6 @@ const Play = () => {
     const token = window.localStorage.getItem("user-token");
     if (token !== null) {
       const response = await usersService.getUserScore(token);
-      console.log(response);
       window.localStorage.setItem("high_score", response);
       setHighScore(response);
       return;
@@ -47,8 +50,8 @@ const Play = () => {
   }, []);
 
   useEffect(() => {
-    fetchRandomNoun();
-  }, [score]);
+    getRandomNoun();
+  }, [score, nouns]);
 
   const onAnswerSubmit = (answer) => {
     if (answer !== noun.gender) {
@@ -92,7 +95,7 @@ const Play = () => {
         setFlashcardAnimation("spawn-animation");
         setPlayConfettiAnimation(false);
         setScore(0);
-        if (score === 0) return fetchRandomNoun();
+        if (score === 0) return getRandomNoun();
         if (score <= highScore) return;
         setHighScore(score);
         window.localStorage.setItem("high_score", score);
@@ -109,7 +112,10 @@ const Play = () => {
 
   return (
     <section>
-      <SettingsMenu />
+      <SettingsMenu 
+        changeConfig={(newConfig) => setConfig(newConfig)}
+        currentConfig={config}
+      />
 
       <div className="game-container">
         <div className="score-container">
@@ -122,14 +128,17 @@ const Play = () => {
             Score: {score}
           </div>
         </div>
-        {noun !== null && (
+        {noun !== null && noun !== undefined && (
           <FlashCard
             noun={noun.name}
-            nounGroup={noun.group}
+            nounGroup={noun.group}            
             submitAnswer={onAnswerSubmit}
+
             flashcardAnimationClass={flashcardAnimation}
             onAnimationEnd={onFlashcardAnimationEnd}
             onAnimationStart={onFlashcardAnimationStart}
+            
+            config={config}
           />
         )}
       </div>

@@ -4,7 +4,7 @@ import "./index.scss";
 import usersService from '../../services/usersService';
 import { Link } from 'react-router-dom';
 
-const SettingsMenu = () => {
+const SettingsMenu = ({currentConfig, changeConfig}) => {
   const [username, setUsername] = useState("");
   const [isLogged, setIsLogged] = useState(false);
   const [settingsMenuOpen, setSettingsMenuOpen] = useState(false);
@@ -32,13 +32,10 @@ const SettingsMenu = () => {
     <div className={settingsMenuOpen ? "settings-container-open" : "settings-container-closed"}>
         <form action="">
           <div className="switch-group">
-              <p>Disable Animations</p> <Switch />
+              <p>Disable Animations</p> <Switch onSwitch={() => changeConfig({...currentConfig, disableAnimations: !currentConfig.disableAnimations})}/>
           </div>
           <div className="switch-group">
-              <p>Disable Animations</p> <Switch />
-          </div>
-          <div className="switch-group">
-              <p>Disable Animations</p> <Switch />
+              <p>Hide noun Group</p> <Switch onSwitch={() => changeConfig({...currentConfig, hideNounGroup: !currentConfig.hideNounGroup})}/>
           </div>
           {isLogged ? 
           <div className="button-group">
