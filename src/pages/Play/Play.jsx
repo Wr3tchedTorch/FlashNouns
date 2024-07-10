@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { FlashCard, SettingsMenu } from "../../components";
-import nounService from "../../services/nounService";
 import Confetti from "react-confetti";
 import useWindowSize from "react-use/lib/useWindowSize";
 import "./index.scss";
@@ -23,7 +22,7 @@ const Play = ({nouns}) => {
   let wrongAudio = new Audio("/sound/wrong_answer.mp3");
   wrongAudio.volume = 0.7;
   let highScoreAudio = new Audio("/sound/high_score.mp3");
-  highScoreAudio.volume = 0.69;
+  highScoreAudio.volume = 0.7;
 
   const getRandomNoun = () => {    
     const randomIndex = Math.floor(Math.random() * nouns.length);
