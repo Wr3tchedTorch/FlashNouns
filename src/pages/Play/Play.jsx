@@ -23,7 +23,7 @@ const Play = ({nouns}) => {
   let wrongAudio = new Audio("/sound/wrong_answer.mp3");
   wrongAudio.volume = 0.7;
   let highScoreAudio = new Audio("/sound/high_score.mp3");
-  highScoreAudio.volume = 0.7;
+  highScoreAudio.volume = 0.69;
 
   const getRandomNoun = () => {    
     const randomIndex = Math.floor(Math.random() * nouns.length);
