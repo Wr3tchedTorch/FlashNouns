@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseURL = "/api/users";
+const baseURL = "http://localhost:3000/api/users";
 
 const getTopFive = async () => {
     const response = await axios.get(`${baseURL}/topFive`);

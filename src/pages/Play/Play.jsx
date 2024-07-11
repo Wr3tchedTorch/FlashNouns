@@ -15,7 +15,7 @@ const Play = ({nouns}) => {
   const [config, setConfig] = useState({
     disableAnimations: false,
     hideNounGroup: false
-  });
+  });  
 
   let correctAudio = new Audio("/sound/correct_answer.mp3");
   correctAudio.volume = 0.7;
@@ -24,8 +24,17 @@ const Play = ({nouns}) => {
   let highScoreAudio = new Audio("/sound/high_score.mp3");
   highScoreAudio.volume = 0.7;
 
+  const getRandomNonRepetitiveNumber = (max) => {
+    let generatedNum = Math.floor(Math.random() * max);
+    if (Number(localStorage.getItem("previousNum")) === generatedNum) {      
+      return getRandomNonRepetitiveNumber(Math.max(max-1, 0));
+    }
+    localStorage.setItem("previousNum", generatedNum);
+    return generatedNum;
+  }
+
   const getRandomNoun = () => {    
-    const randomIndex = Math.floor(Math.random() * nouns.length);
+    const randomIndex = getRandomNonRepetitiveNumber(nouns.length);
     setNoun(nouns[randomIndex]);
     setFlashcardAnimation("spawn-animation");
   };
@@ -50,6 +59,7 @@ const Play = ({nouns}) => {
 
   useEffect(() => {
     getRandomNoun();
+    setFlashcardAnimation("spawn-animation");
   }, [score, nouns]);
 
   const onAnswerSubmit = (answer) => {
@@ -63,14 +73,12 @@ const Play = ({nouns}) => {
     const token = window.localStorage.getItem("user-token");
     if (token !== null) {
       const response = await usersService.updateScore(token, score);
-      console.log(response);
     }
   };
 
   const onFlashcardAnimationEnd = () => {
     switch (flashcardAnimation) {
       case "correct-animation":
-        setFlashcardAnimation("spawn-animation");
         setScore(score + 1);
 
         if (score + 1 <= highScore) return;
@@ -91,9 +99,8 @@ const Play = ({nouns}) => {
         break;
       case "wrong-animation":
         updateHighScore();
-        setFlashcardAnimation("spawn-animation");
         setPlayConfettiAnimation(false);
-        setScore(0);
+        setScore(0);        
         if (score === 0) return getRandomNoun();
         if (score <= highScore) return;
         setHighScore(score);
