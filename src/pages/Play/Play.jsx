@@ -24,17 +24,12 @@ const Play = ({nouns}) => {
   let highScoreAudio = new Audio("/sound/high_score.mp3");
   highScoreAudio.volume = 0.7;
 
-  const getRandomNonRepetitiveNumber = (max) => {
-    let generatedNum = Math.floor(Math.random() * max);
-    if (Number(localStorage.getItem("previousNum")) === generatedNum) {      
-      return getRandomNonRepetitiveNumber(Math.max(max-1, 0));
-    }
-    localStorage.setItem("previousNum", generatedNum);
-    return generatedNum;
+  const getRandomNumber = (max) => {    
+    return Math.floor(Math.random() * max);
   }
 
   const getRandomNoun = () => {    
-    const randomIndex = getRandomNonRepetitiveNumber(nouns.length);
+    const randomIndex = getRandomNumber(nouns.length);
     setNoun(nouns[randomIndex]);
     setFlashcardAnimation("spawn-animation");
   };
@@ -72,7 +67,7 @@ const Play = ({nouns}) => {
   const updateHighScore = async () => {
     const token = window.localStorage.getItem("user-token");
     if (token !== null) {
-      const response = await usersService.updateScore(token, score);
+      await usersService.updateScore(token, score);
     }
   };
 

@@ -1,10 +1,13 @@
 import { useState } from "react";
-import "./index.scss";
 import { MdMenu } from "react-icons/md";
 import { RxCross1 as RxCross2 } from "react-icons/rx";
+import { Link, useLocation } from "react-router-dom";
+import "./index.scss";
 
 const Navbar = () => {
   const [menuState, setMenuState] = useState(false);
+  const location = useLocation().pathname;  
+  console.log(location);
 
   return (
     <nav className="navbar">
@@ -20,9 +23,9 @@ const Navbar = () => {
               <a href="https://www.linkedin.com/in/eric-moura-dev/" target="_blank" className="linkedin">  <img src="/social/linkedin.svg" alt="linkedin icon" />  </a>
               <a href="https://github.com/Wr3tchedTorch" target="_blank" className="github">    <img src="/social/github.svg" alt="github icon" />    </a>
             </div>
-            <a href="" className="nav-link active"><p>Play</p></a>
-            <a href="" className="nav-link"><p>Leaderboard</p></a>
-            <a href="" className="nav-link"><p>Help</p></a>
+            <Link to="/" className={"nav-link " + (location === "/" && "active")}><p>Play</p></Link>
+            <Link to="/leaderboard" className={"nav-link " + (location === "/leaderboard" && "active")}><p>Leaderboard</p></Link>
+            <Link to="/help" className={"nav-link " + (location === "/help" && "active")}><p>Help</p></Link>
         </div>
         {menuState ? 
           <RxCross2 size={40} className="menu-button" onClick={() => setMenuState(false)}/> :
