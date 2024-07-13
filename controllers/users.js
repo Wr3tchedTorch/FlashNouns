@@ -10,8 +10,8 @@ userRouter
     res.status(200).json(users);
   })
   .get("/topFive", async (req, res) => {
-    const users = await User.find({}).sort("score");    
-    res.status(200).json(users.slice(Math.max(users.length-5, 0)));
+    const users = await User.find({}).sort("score");
+    res.status(200).json(users.slice(Math.max(users.length-5, 0)).reverse());
   })
   .post("/", async (req, res) => {
     const body = req.body;
@@ -39,10 +39,11 @@ userRouter
     const user = jwt.verify(token, process.env.SECRET);    
     res.json({message: "success: token valid."});
   })
-  .post("/getScore", async (req, res) => {
+  .post("/getUser", async (req, res) => {
     const token = req.body.token;
     const user = jwt.verify(token, process.env.SECRET);    
-    res.json(user.score);
+    const userInDb = await User.find({username: user.username});
+    res.json(userInDb);
   });
 
 module.exports = userRouter;
