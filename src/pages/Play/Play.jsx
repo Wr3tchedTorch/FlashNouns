@@ -93,11 +93,11 @@ const Play = ({nouns}) => {
         }, 3000);
         break;
       case "wrong-animation":
-        updateHighScore();
         setPlayConfettiAnimation(false);
         setScore(0);        
         if (score === 0) return getRandomNoun();
         if (score <= highScore) return;
+        updateHighScore();
         setHighScore(score);
         window.localStorage.setItem("high_score", score);
         break;
