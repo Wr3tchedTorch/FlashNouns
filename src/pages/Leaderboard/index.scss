@@ -1,0 +1,80 @@
+@import "../../global.scss";
+
+.background {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    flex-wrap: nowrap;
+    z-index: -1;
+    width: auto;
+    height: 100vh;
+
+    .bg-image-login {
+        width: 1440px;
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-image: url("haikei_backgrounds/symbol-scatter-haikei.svg");
+        animation: float-left 50s linear infinite;
+        filter: brightness(90%) opacity(.5);   
+    }
+
+    @keyframes float-left {
+        0% {
+            transform: translateX(0);
+        }
+        
+        100% {
+            transform: translateX(100%);
+        }
+    }
+}
+
+table {
+    border: none;
+    width: 30%;
+    margin: auto;
+    margin-top: 20vh;    
+
+    thead {
+        tr {
+            td {
+                color: #fff;
+                font-size: 25px;
+                font-family: "Jetbrains Mono";
+                background-color: $background-darker-color;
+            }
+        }
+    }    
+    tbody {
+        background-color: #fff;
+        tr {                    
+            td {
+                font-family: "Jaldi";
+                font-size: 22px;                
+            }
+            td.rank {
+                background-color: #4D4D4D;
+                color: #fff;
+                font-size: 25px;
+                text-align: center;
+                border-bottom: 1px solid white;
+            }        
+
+            td.rank-1 {
+                background-color: #E9EC44;
+                color: #000;
+            }            
+            td.rank-2 {
+                background-color: #B6C2C2;
+            }
+            td.rank-3 {
+                background-color: #CF9176;
+            }
+        }
+    }
+}
+
+td {
+    padding: 20px 20px;
+}

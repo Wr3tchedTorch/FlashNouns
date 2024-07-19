@@ -8,14 +8,14 @@ $nav-link-active: #fff;
   top: 0;
   right: 0;
   left: 0;
-  background-color: $background-darker-color;
   height: 50px;
   display: flex;
-  padding: 15px 300px;
   align-items: center;
   justify-content: space-between;
-  box-shadow: -2px 10px 10px -5px rgba(79, 79, 79, 0.15);
+  padding: 15px 300px;
   z-index: 999;
+  box-shadow: -2px 10px 10px -5px rgba(79, 79, 79, 0.15);
+  background-color: $background-darker-color;
 
   .logo {
     position: absolute;

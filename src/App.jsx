@@ -1,10 +1,10 @@
 import { Navbar } from "./components"
 import { Route, Routes } from "react-router-dom";
-import { Login, Play, SignUp } from "./pages";
-import "./app.scss";
+import { Leaderboard, Login, Play, SignUp } from "./pages";
 import { useEffect, useState } from "react";
 import usersService from "./services/usersService";
 import nounService from "./services/nounService";
+import "./app.scss";
 
 function App() {
   const [isLogged, setIsLogged] = useState(false);
@@ -30,6 +30,7 @@ function App() {
     <>        
       <Navbar />      
       <Routes>
+        <Route path="/leaderboard" element={<Leaderboard />}/>
         <Route path="/" element={<Play nouns={nouns}/>} />
         { !isLogged &&
           <Route path="/login" element={<Login/>} /> }

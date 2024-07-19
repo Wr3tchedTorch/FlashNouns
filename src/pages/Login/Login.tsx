@@ -37,9 +37,9 @@ const Login = () => {
         </div>        
         <h1 className="title">Login</h1>
         <form onSubmit={handleLogin}>          
-            <input type="text" name="" id="" className="username-input" minLength={3} required placeholder='username' value={username} onChange={(e) => setUsername(e.target.value)}/>
+            <input type="text" name=""className="username-input" minLength={3} required placeholder='username' value={username} onChange={(e) => setUsername(e.target.value)}/>
             <div className="password-input">
-              <input type={passwordVisible ? "text" : "password"} name="" id="" className="password-input" minLength={6} required placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)}/>              
+              <input type={passwordVisible ? "text" : "password"} name="" className="password-input" minLength={6} required placeholder='password' value={password} onChange={(e) => setPassword(e.target.value)}/>              
               {passwordVisible ? <FaEyeSlash  className="FaEyeSlash" onClick={() => setPasswordVisible(false)} size={35}/> :
                                  <FaEye className="FaEye" onClick={() => setPasswordVisible(true)} size={35}/>}
             </div>
