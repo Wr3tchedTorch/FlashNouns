@@ -39,7 +39,7 @@ const Play = ({nouns}) => {
     if (token !== null) {
       const response = await usersService.getUserScore(token);
       window.localStorage.setItem("high_score", response);
-      setHighScore(response);
+      setHighScore(response.score);
       return;
     }
 

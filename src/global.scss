@@ -3,9 +3,7 @@
 
 $background-primary-color: #fffad7;
 $background-darker-color: #e97777;
-
 $button-primary: #ff9f9f;
-
 $title-font: "JetBrains Mono";
 $paragraph-font: "Jaldi";
 
@@ -26,6 +24,7 @@ h1 {
 p,
 a {
   font-family: $paragraph-font;
+  font-size: 18px;
 }
 
 a {

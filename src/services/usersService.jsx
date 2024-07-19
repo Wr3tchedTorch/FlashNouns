@@ -26,8 +26,8 @@ const validateToken = async (token) => {
 }
 
 const getUserScore = async (token) => {
-    const response = await axios.post(`${baseURL}/getScore`, {token: token});       
-    return response.data;
+    const response = await axios.post(`${baseURL}/getUser`, {token: token});
+    return response.data[0];
 }
 
 export default {getTopFive, create, validateToken, updateScore, getUserScore};

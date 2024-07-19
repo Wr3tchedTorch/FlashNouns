@@ -1,0 +1,67 @@
+body {
+    overflow-y: visible;
+}
+
+#help {
+    width: 50%;
+    margin: 150px auto;
+    display: flex;
+    justify-content: left;
+    text-align: left;
+    flex-wrap: wrap;
+
+    img {
+        width: 100%;
+    }
+    a,
+    p {
+        line-height: 1.9em;
+        font-size: 21px;
+        margin-top: 0;
+    }
+    h1 {
+        margin-bottom: 5px;
+    }
+
+    .blob-01 {
+        width: 160px;        
+        position: absolute;
+        top: 1200px;
+        left: 0;
+    }
+    .blob-02 {
+        width: 200px;        
+        position: absolute;
+        top: 180em;
+        right: 0;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    #help {
+        width: 65%;
+    }
+    
+}
+
+@media screen and (max-width: 800px) {
+    #help {
+        width: 85%;
+    }
+    .blob-01 {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    #help {
+        width: 95%;
+    }
+    p,
+    a {
+        font-size: 18px !important;        
+    }
+    h1 {
+        font-size: 30px;
+    }
+}

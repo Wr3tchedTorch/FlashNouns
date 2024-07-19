@@ -1,10 +1,9 @@
 import { Navbar } from "./components"
 import { Route, Routes } from "react-router-dom";
-import { Leaderboard, Login, Play, SignUp } from "./pages";
+import { Help, Leaderboard, Login, Play, SignUp } from "./pages";
 import { useEffect, useState } from "react";
 import usersService from "./services/usersService";
 import nounService from "./services/nounService";
-import "./app.scss";
 
 function App() {
   const [isLogged, setIsLogged] = useState(false);
@@ -14,24 +13,29 @@ function App() {
     const data = await nounService.getNouns();
     setNouns(data);
   }
-  
-  useEffect(() => {
-    fetchNouns();
 
+  const getToken = () => {
     let token = localStorage.getItem("user-token");
     if (token === null) return;
-
+  
     usersService.validateToken(token).then(result => {
       if (result) setIsLogged(true);
     })
+
+  }
+  
+  useEffect(() => {
+    fetchNouns();
+    getToken();
   }, []);
 
   return (
     <>        
       <Navbar />      
       <Routes>
-        <Route path="/leaderboard" element={<Leaderboard />}/>
         <Route path="/" element={<Play nouns={nouns}/>} />
+        <Route path="/leaderboard" element={<Leaderboard />}/>
+        <Route path="/help" element={<Help />}/>
         { !isLogged &&
           <Route path="/login" element={<Login/>} /> }
         { !isLogged &&
